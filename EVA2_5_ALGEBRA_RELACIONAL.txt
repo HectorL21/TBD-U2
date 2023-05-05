@@ -1,0 +1,2003 @@
+MySQL Shell 8.0.32
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.32 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > \use eva_2
+Default schema set to `eva_2`.
+Fetching global names, object names from `eva_2` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  eva_2  SQL > show tables;
++-----------------+
+| Tables_in_eva_2 |
++-----------------+
+| contactos       |
+| detalle         |
+| detallefactura  |
+| factura         |
+| maestro         |
+| phones          |
++-----------------+
+6 rows in set (0.0035 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > create tablaA(
+                                      -> id entero,
+                                      -> nombre varchar(10);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tablaA(
+id entero,
+nombre varchar(10)' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > create tablaA( id entero, nombre varchar(10));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tablaA( id entero, nombre varchar(10))' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > create tablaA(
+                                      -> id int,
+                                      -> nombre varchar(10));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tablaA(
+id int,
+nombre varchar(10))' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > create tablaA( id int,  nombre varchar(10);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tablaA( id int,  nombre varchar(10)' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > create tablaA(
+                                      -> id int,
+                                      -> nombre varchar(10));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tablaA(
+id int,
+nombre varchar(10))' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > create table tablaA( id int, nombre varchar(10));
+Query OK, 0 rows affected (0.0387 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > create table tablaB( id int, nombre varchar(10));
+Query OK, 0 rows affected (0.0195 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > show tables;
++-----------------+
+| Tables_in_eva_2 |
++-----------------+
+| contactos       |
+| detalle         |
+| detallefactura  |
+| factura         |
+| maestro         |
+| phones          |
+| tablaa          |
+| tablab          |
++-----------------+
+8 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > desc tablaa;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| nombre | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.0022 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > desc tablab:
+                                      -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > desc tablab;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  |     | NULL    |       |
+| nombre | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.0026 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > insert into tablaa(id, nombre)
+                                      -> values(1,'A');
+Query OK, 1 row affected (0.0103 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > insert into tablaa(id, nombre) values(2,'B');
+Query OK, 1 row affected (0.0041 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > insert into tablaa(id, nombre) values(3,'C');
+Query OK, 1 row affected (0.0032 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > insert into tablaa(id, nombre) values(4,'D');
+Query OK, 1 row affected (0.0037 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa;
++----+--------+
+| id | nombre |
++----+--------+
+|  1 | A      |
+|  2 | B      |
+|  3 | C      |
+|  4 | D      |
++----+--------+
+4 rows in set (0.0006 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > insert into tablab
+                                      -> values(1,'X'),(2,'Y'),(3,'Z'),(4,'A'),(5,'B');
+Query OK, 5 rows affected (0.0063 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaB;
++----+--------+
+| id | nombre |
++----+--------+
+|  1 | X      |
+|  2 | Y      |
+|  3 | Z      |
+|  4 | A      |
+|  5 | B      |
++----+--------+
+5 rows in set (0.0006 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > selec * from tablaa, tablab;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec * from tablaa, tablab' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > selec * from tablaa, tablab
+                                      -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec * from tablaa, tablab' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa,tablaB;
++----+--------+----+--------+
+| id | nombre | id | nombre |
++----+--------+----+--------+
+|  4 | D      |  1 | X      |
+|  3 | C      |  1 | X      |
+|  2 | B      |  1 | X      |
+|  1 | A      |  1 | X      |
+|  4 | D      |  2 | Y      |
+|  3 | C      |  2 | Y      |
+|  2 | B      |  2 | Y      |
+|  1 | A      |  2 | Y      |
+|  4 | D      |  3 | Z      |
+|  3 | C      |  3 | Z      |
+|  2 | B      |  3 | Z      |
+|  1 | A      |  3 | Z      |
+|  4 | D      |  4 | A      |
+|  3 | C      |  4 | A      |
+|  2 | B      |  4 | A      |
+|  1 | A      |  4 | A      |
+|  4 | D      |  5 | B      |
+|  3 | C      |  5 | B      |
+|  2 | B      |  5 | B      |
+|  1 | A      |  5 | B      |
++----+--------+----+--------+
+20 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa, tablaB order by tablaa.nombre;
++----+--------+----+--------+
+| id | nombre | id | nombre |
++----+--------+----+--------+
+|  1 | A      |  1 | X      |
+|  1 | A      |  2 | Y      |
+|  1 | A      |  3 | Z      |
+|  1 | A      |  4 | A      |
+|  1 | A      |  5 | B      |
+|  2 | B      |  1 | X      |
+|  2 | B      |  2 | Y      |
+|  2 | B      |  3 | Z      |
+|  2 | B      |  4 | A      |
+|  2 | B      |  5 | B      |
+|  3 | C      |  1 | X      |
+|  3 | C      |  2 | Y      |
+|  3 | C      |  3 | Z      |
+|  3 | C      |  4 | A      |
+|  3 | C      |  5 | B      |
+|  4 | D      |  1 | X      |
+|  4 | D      |  2 | Y      |
+|  4 | D      |  3 | Z      |
+|  4 | D      |  4 | A      |
+|  4 | D      |  5 | B      |
++----+--------+----+--------+
+20 rows in set (0.0026 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select tablaa.nombre, tablab.nombre
+                                      -> from tablaa, tablab
+                                      -> order by tablaa.nombre;
++--------+--------+
+| nombre | nombre |
++--------+--------+
+| A      | X      |
+| A      | Y      |
+| A      | Z      |
+| A      | A      |
+| A      | B      |
+| B      | X      |
+| B      | Y      |
+| B      | Z      |
+| B      | A      |
+| B      | B      |
+| C      | X      |
+| C      | Y      |
+| C      | Z      |
+| C      | A      |
+| C      | B      |
+| D      | X      |
+| D      | Y      |
+| D      | Z      |
+| D      | A      |
+| D      | B      |
++--------+--------+
+20 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select a.nombre, b.nombre from tablaa a, tablab b order by a.nombre;
++--------+--------+
+| nombre | nombre |
++--------+--------+
+| A      | X      |
+| A      | Y      |
+| A      | Z      |
+| A      | A      |
+| A      | B      |
+| B      | X      |
+| B      | Y      |
+| B      | Z      |
+| B      | A      |
+| B      | B      |
+| C      | X      |
+| C      | Y      |
+| C      | Z      |
+| C      | A      |
+| C      | B      |
+| D      | X      |
+| D      | Y      |
+| D      | Z      |
+| D      | A      |
+| D      | B      |
++--------+--------+
+20 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa;
++----+--------+
+| id | nombre |
++----+--------+
+|  1 | A      |
+|  2 | B      |
+|  3 | C      |
+|  4 | D      |
++----+--------+
+4 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa
+                                      -> union
+                                      -> select * from tablab;
++----+--------+
+| id | nombre |
++----+--------+
+|  1 | A      |
+|  2 | B      |
+|  3 | C      |
+|  4 | D      |
+|  1 | X      |
+|  2 | Y      |
+|  3 | Z      |
+|  4 | A      |
+|  5 | B      |
++----+--------+
+9 rows in set (0.0020 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > \use sakila
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| agencia            |
+| eva_2              |
+| evaluacíon_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| practica_3         |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > \use sakila
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > desc actor;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| actor_id    | smallint unsigned | NO   | PRI | NULL              | auto_increment                                |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   | MUL | NULL              |                                               |
+| last_update | timestamp         | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+4 rows in set (0.0023 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > desc customer;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| customer_id | smallint unsigned | NO   | PRI | NULL              | auto_increment                                |
+| store_id    | tinyint unsigned  | NO   | MUL | NULL              |                                               |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   | MUL | NULL              |                                               |
+| email       | varchar(50)       | YES  |     | NULL              |                                               |
+| address_id  | smallint unsigned | NO   | MUL | NULL              |                                               |
+| active      | tinyint(1)        | NO   |     | 1                 |                                               |
+| create_date | datetime          | NO   |     | NULL              |                                               |
+| last_update | timestamp         | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+9 rows in set (0.0024 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > selec distict(last_name) from customer;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec distict(last_name) from customer' at line 1
+ MySQL  localhost:3306 ssl  sakila  SQL > selec distinct(last_name) from customer;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec distinct(last_name) from customer' at line 1
+ MySQL  localhost:3306 ssl  sakila  SQL > selec distinct(last_name) from customer;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec distinct(last_name) from customer' at line 1
+ MySQL  localhost:3306 ssl  sakila  SQL > selec distinct(last_name) from distinct;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec distinct(last_name) from distinct' at line 1
+ MySQL  localhost:3306 ssl  sakila  SQL > select distinct(last_name) from distinct;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'distinct' at line 1
+ MySQL  localhost:3306 ssl  sakila  SQL > select distinct(last_name) from customer;
++--------------+
+| last_name    |
++--------------+
+| ABNEY        |
+| ADAM         |
+| ADAMS        |
+| ALEXANDER    |
+| ALLARD       |
+| ALLEN        |
+| ALVAREZ      |
+| ANDERSON     |
+| ANDREW       |
+| ANDREWS      |
+| AQUINO       |
+| ARCE         |
+| ARCHULETA    |
+| ARMSTRONG    |
+| ARNOLD       |
+| ARSENAULT    |
+| ARTIS        |
+| ASHCRAFT     |
+| ASHER        |
+| AUSTIN       |
+| BAILEY       |
+| BAKER        |
+| BALES        |
+| BANDA        |
+| BANKS        |
+| BARBEE       |
+| BARCLAY      |
+| BARFIELD     |
+| BARKLEY      |
+| BARNES       |
+| BARNETT      |
+| BARRETT      |
+| BATES        |
+| BAUGH        |
+| BAUGHMAN     |
+| BELL         |
+| BENNER       |
+| BENNETT      |
+| BERRY        |
+| BESS         |
+| BETANCOURT   |
+| BILLINGSLEY  |
+| BISHOP       |
+| BLACK        |
+| BLAKELY      |
+| BOLIN        |
+| BONE         |
+| BOSTIC       |
+| BOUDREAU     |
+| BOURQUE      |
+| BOWENS       |
+| BOWMAN       |
+| BOX          |
+| BOYD         |
+| BRADLEY      |
+| BREAUX       |
+| BREWER       |
+| BRINSON      |
+| BROOKS       |
+| BROTHERS     |
+| BROWN        |
+| BROWNLEE     |
+| BRYANT       |
+| BUFORD       |
+| BULL         |
+| BUNN         |
+| BURK         |
+| BURKE        |
+| BURLESON     |
+| BURNS        |
+| BURTON       |
+| BUSTAMANTE   |
+| BUTLER       |
+| BUTTERFIELD  |
+| BYRD         |
+| CABRAL       |
+| CALDWELL     |
+| CAMPBELL     |
+| CARBONE      |
+| CARLSON      |
+| CARPENTER    |
+| CARR         |
+| CARRANZA     |
+| CARROLL      |
+| CARTER       |
+| CARY         |
+| CASILLAS     |
+| CASTILLO     |
+| CASTRO       |
+| CAUSEY       |
+| CHAMBERS     |
+| CHAPA        |
+| CHAPMAN      |
+| CHAVEZ       |
+| CHEATHAM     |
+| CHESTNUT     |
+| CHISHOLM     |
+| CHOATE       |
+| CHRISTENSON  |
+| CHURCHILL    |
+| CINTRON      |
+| CLARK        |
+| CLARY        |
+| COLBY        |
+| COLE         |
+| COLEMAN      |
+| COLLAZO      |
+| COLLINS      |
+| COOK         |
+| COOPER       |
+| CORNISH      |
+| CORNWELL     |
+| COUGHLIN     |
+| COX          |
+| COY          |
+| CRAIG        |
+| CRAWFORD     |
+| CRAWLEY      |
+| CROMWELL     |
+| CROUSE       |
+| CRUZ         |
+| CULP         |
+| CULPEPPER    |
+| CUNNINGHAM   |
+| CURLEY       |
+| CURRIER      |
+| CURTIS       |
+| DANIELS      |
+| DAVIDSON     |
+| DAVIS        |
+| DAY          |
+| DEAN         |
+| DELOACH      |
+| DELUCA       |
+| DELVALLE     |
+| DEVORE       |
+| DIAZ         |
+| DIXON        |
+| DOUGLAS      |
+| DOUGLASS     |
+| DOWD         |
+| DUGGAN       |
+| DUNCAN       |
+| DUNN         |
+| EAST         |
+| EASTER       |
+| EBERT        |
+| EDWARDS      |
+| EGGLESTON    |
+| ELLINGTON    |
+| ELLIOTT      |
+| ELLIS        |
+| ELROD        |
+| ELY          |
+| EMMONS       |
+| ESTEP        |
+| EVANS        |
+| FARNSWORTH   |
+| FENNELL      |
+| FERGUSON     |
+| FERNANDEZ    |
+| FIELDS       |
+| FISHER       |
+| FLEMING      |
+| FLETCHER     |
+| FLORES       |
+| FORD         |
+| FORMAN       |
+| FORSYTHE     |
+| FORTIER      |
+| FORTNER      |
+| FOSTER       |
+| FOUST        |
+| FOWLER       |
+| FOX          |
+| FRALEY       |
+| FRANCISCO    |
+| FRANKLIN     |
+| FRAZIER      |
+| FREEMAN      |
+| FULLER       |
+| FULTZ        |
+| GAFFNEY      |
+| GAITHER      |
+| GAMEZ        |
+| GANDY        |
+| GANNON       |
+| GARCIA       |
+| GARDINER     |
+| GARDNER      |
+| GARRETT      |
+| GARZA        |
+| GAVIN        |
+| GEARY        |
+| GEORGE       |
+| GIBSON       |
+| GILBERT      |
+| GILLETTE     |
+| GILLILAND    |
+| GILMAN       |
+| GOMEZ        |
+| GONZALES     |
+| GONZALEZ     |
+| GOOCH        |
+| GOODEN       |
+| GORDON       |
+| GRAF         |
+| GRAHAM       |
+| GRANT        |
+| GRAVES       |
+| GRAY         |
+| GRECO        |
+| GREEN        |
+| GREENE       |
+| GREGORY      |
+| GRESHAM      |
+| GREY         |
+| GRIFFIN      |
+| GRIGSBY      |
+| GRISSOM      |
+| GRUBER       |
+| GUAJARDO     |
+| GUILLEN      |
+| GUNDERSON    |
+| GUTIERREZ    |
+| HALE         |
+| HALL         |
+| HAMILTON     |
+| HANNON       |
+| HANSEN       |
+| HANSON       |
+| HARDER       |
+| HARDISON     |
+| HARKINS      |
+| HARPER       |
+| HARRIS       |
+| HARRISON     |
+| HART         |
+| HARVEY       |
+| HAUSER       |
+| HAVENS       |
+| HAWKINS      |
+| HAWKS        |
+| HAYES        |
+| HEATON       |
+| HENDERSON    |
+| HENNING      |
+| HENRY        |
+| HERNANDEZ    |
+| HERRERA      |
+| HERRMANN     |
+| HERZOG       |
+| HIATT        |
+| HICKS        |
+| HIDALGO      |
+| HILL         |
+| HITE         |
+| HOFFMAN      |
+| HOLLAND      |
+| HOLM         |
+| HOLMES       |
+| HOLT         |
+| HOPKINS      |
+| HORTON       |
+| HOULE        |
+| HOWARD       |
+| HOWELL       |
+| HOWLAND      |
+| HUDSON       |
+| HUEY         |
+| HUGHES       |
+| HUNT         |
+| HUNTER       |
+| HURTADO      |
+| IRBY         |
+| ISBELL       |
+| ISOM         |
+| JACKSON      |
+| JACOBS       |
+| JAMES        |
+| JENKINS      |
+| JENNINGS     |
+| JENSEN       |
+| JIMENEZ      |
+| JOHNSON      |
+| JOHNSTON     |
+| JONES        |
+| JORDAN       |
+| JORDON       |
+| JOY          |
+| JUNG         |
+| KAHN         |
+| KELLEY       |
+| KELLY        |
+| KENNEDY      |
+| KENYON       |
+| KIM          |
+| KINDER       |
+| KING         |
+| KNIGHT       |
+| KNOTT        |
+| KOWALSKI     |
+| KRAUS        |
+| KRUGER       |
+| LAMBERT      |
+| LANCE        |
+| LANE         |
+| LARSON       |
+| LARUE        |
+| LAWRENCE     |
+| LAWSON       |
+| LAWTON       |
+| LEE          |
+| LEONE        |
+| LEWIS        |
+| LINTON       |
+| LITTLE       |
+| LOMBARDI     |
+| LONG         |
+| LOPEZ        |
+| LOVELACE     |
+| LOWE         |
+| LUCAS        |
+| LUMPKIN      |
+| LYMAN        |
+| LYNCH        |
+| MACKENZIE    |
+| MADRIGAL     |
+| MAHAN        |
+| MAHON        |
+| MALCOLM      |
+| MARK         |
+| MARKHAM      |
+| MARLOW       |
+| MARSHALL     |
+| MARTEL       |
+| MARTIN       |
+| MARTINEZ     |
+| MARTINO      |
+| MASON        |
+| MATTHEWS     |
+| MATTOX       |
+| MAULDIN      |
+| MAY          |
+| MCADAMS      |
+| MCALISTER    |
+| MCCARTER     |
+| MCCARTNEY    |
+| MCCOY        |
+| MCCRARY      |
+| MCCURDY      |
+| MCDONALD     |
+| MCDUFFIE     |
+| MCKINNEY     |
+| MCWHORTER    |
+| MEADOR       |
+| MEDINA       |
+| MEEHAN       |
+| MEEK         |
+| MENA         |
+| MENARD       |
+| MENDOZA      |
+| MEYER        |
+| MILAM        |
+| MILES        |
+| MILLARD      |
+| MILLER       |
+| MILLS        |
+| MILNER       |
+| MITCHELL     |
+| MOELLER      |
+| MONTGOMERY   |
+| MOORE        |
+| MORALES      |
+| MORENO       |
+| MORGAN       |
+| MORRELL      |
+| MORRIS       |
+| MORRISON     |
+| MORRISSEY    |
+| MOTLEY       |
+| MURPHY       |
+| MURRAY       |
+| MURRELL      |
+| MYERS        |
+| NEAL         |
+| NELSON       |
+| NETTLES      |
+| NEUMANN      |
+| NEWSOM       |
+| NGO          |
+| NGUYEN       |
+| NICHOLS      |
+| NOE          |
+| NOLAND       |
+| NOLEN        |
+| OBRIEN       |
+| OCAMPO       |
+| OGLESBY      |
+| OLIVARES     |
+| OLIVER       |
+| OLSON        |
+| OLVERA       |
+| ORTIZ        |
+| OUTLAW       |
+| OWENS        |
+| PAINE        |
+| PALMER       |
+| PARKER       |
+| PATTERSON    |
+| PAYNE        |
+| PEARSON      |
+| PEMBERTON    |
+| PENA         |
+| PEREZ        |
+| PERKINS      |
+| PERRY        |
+| PERRYMAN     |
+| PETERS       |
+| PETERSON     |
+| PFEIFFER     |
+| PHILLIPS     |
+| PIERCE       |
+| PINSON       |
+| PITT         |
+| POINDEXTER   |
+| PORTER       |
+| POULIN       |
+| POWELL       |
+| POWER        |
+| PREWITT      |
+| PRICE        |
+| PULLEN       |
+| PURDY        |
+| QUALLS       |
+| QUIGLEY      |
+| QUINTANILLA  |
+| RALSTON      |
+| RAMIREZ      |
+| RAMOS        |
+| RAPP         |
+| RATCLIFF     |
+| RAY          |
+| REA          |
+| REED         |
+| REID         |
+| RENNER       |
+| REYES        |
+| REYNOLDS     |
+| RHOADS       |
+| RHODES       |
+| RICE         |
+| RICHARDS     |
+| RICHARDSON   |
+| RICKETTS     |
+| RICO         |
+| RILEY        |
+| RINEHART     |
+| RIVERA       |
+| ROBB         |
+| ROBERT       |
+| ROBERTS      |
+| ROBERTSON    |
+| ROBINS       |
+| ROBINSON     |
+| RODRIGUEZ    |
+| RODRIQUEZ    |
+| ROGERS       |
+| ROMERO       |
+| ROSE         |
+| ROSS         |
+| ROUSH        |
+| ROYAL        |
+| RUIZ         |
+| RUNYON       |
+| RUSSELL      |
+| RYAN         |
+| SALISBURY    |
+| SANBORN      |
+| SANCHEZ      |
+| SANDERS      |
+| SATTERFIELD  |
+| SAUER        |
+| SCARBOROUGH  |
+| SCHILLING    |
+| SCHMIDT      |
+| SCHOFIELD    |
+| SCHRADER     |
+| SCHULER      |
+| SCHWAB       |
+| SCHWARZ      |
+| SCOTT        |
+| SCROGGINS    |
+| SEAL         |
+| SELBY        |
+| SEWARD       |
+| SHANKS       |
+| SHAW         |
+| SHELBY       |
+| SHELLEY      |
+| SHELTON      |
+| SHERROD      |
+| SIKES        |
+| SILVA        |
+| SILVERMAN    |
+| SIMMONS      |
+| SIMPKINS     |
+| SIMPSON      |
+| SIMS         |
+| SKIDMORE     |
+| SLEDGE       |
+| SLONE        |
+| SMITH        |
+| SNYDER       |
+| SOTO         |
+| SOUTH        |
+| SPEAR        |
+| SPENCER      |
+| SPURLOCK     |
+| STANFIELD    |
+| STANLEY      |
+| STCLAIR      |
+| STEPHENS     |
+| STEPP        |
+| STEVENS      |
+| STEWART      |
+| STILL        |
+| STONE        |
+| SULLIVAN     |
+| SUTTON       |
+| SWAFFORD     |
+| TALBERT      |
+| TAN          |
+| TAYLOR       |
+| TEEL         |
+| TERRY        |
+| THOMAS       |
+| THOMPSON     |
+| THORN        |
+| THRASHER     |
+| TIRADO       |
+| TOBIAS       |
+| TOMLIN       |
+| TORRES       |
+| TROUT        |
+| TROUTMAN     |
+| TRUONG       |
+| TUBBS        |
+| TUCKER       |
+| TURNER       |
+| TURPIN       |
+| VANHORN      |
+| VARGAS       |
+| VARNEY       |
+| VASQUEZ      |
+| VEST         |
+| VINES        |
+| VU           |
+| WADE         |
+| WAGGONER     |
+| WAGNER       |
+| WALDROP      |
+| WALKER       |
+| WALLACE      |
+| WALTERS      |
+| WARD         |
+| WARREN       |
+| WASHINGTON   |
+| WATKINS      |
+| WATSON       |
+| WATTS        |
+| WAUGH        |
+| WAY          |
+| WEAVER       |
+| WEBB         |
+| WEINER       |
+| WELCH        |
+| WELLS        |
+| WEST         |
+| WESTMORELAND |
+| WHEAT        |
+| WHEELER      |
+| WHITE        |
+| WHITING      |
+| WILES        |
+| WILLIAMS     |
+| WILLIAMSON   |
+| WILLIS       |
+| WILSON       |
+| WINDHAM      |
+| WOFFORD      |
+| WOOD         |
+| WOODS        |
+| WREN         |
+| WRIGHT       |
+| WYMAN        |
+| YANEZ        |
+| YEE          |
+| YOUNG        |
++--------------+
+599 rows in set (0.0593 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select distinct(last_name) from actor;
++--------------+
+| last_name    |
++--------------+
+| AKROYD       |
+| ALLEN        |
+| ASTAIRE      |
+| BACALL       |
+| BAILEY       |
+| BALE         |
+| BALL         |
+| BARRYMORE    |
+| BASINGER     |
+| BENING       |
+| BERGEN       |
+| BERGMAN      |
+| BERRY        |
+| BIRCH        |
+| BLOOM        |
+| BOLGER       |
+| BRIDGES      |
+| BRODY        |
+| BULLOCK      |
+| CAGE         |
+| CARREY       |
+| CHAPLIN      |
+| CHASE        |
+| CLOSE        |
+| COSTNER      |
+| CRAWFORD     |
+| CRONYN       |
+| CROWE        |
+| CRUISE       |
+| CRUZ         |
+| DAMON        |
+| DAVIS        |
+| DAY-LEWIS    |
+| DEAN         |
+| DEE          |
+| DEGENERES    |
+| DENCH        |
+| DEPP         |
+| DERN         |
+| DREYFUSS     |
+| DUKAKIS      |
+| DUNST        |
+| FAWCETT      |
+| GABLE        |
+| GARLAND      |
+| GIBSON       |
+| GOLDBERG     |
+| GOODING      |
+| GRANT        |
+| GUINESS      |
+| HACKMAN      |
+| HARRIS       |
+| HAWKE        |
+| HESTON       |
+| HOFFMAN      |
+| HOPE         |
+| HOPKINS      |
+| HOPPER       |
+| HUDSON       |
+| HUNT         |
+| HURT         |
+| JACKMAN      |
+| JOHANSSON    |
+| JOLIE        |
+| JOVOVICH     |
+| KEITEL       |
+| KILMER       |
+| LEIGH        |
+| LOLLOBRIGIDA |
+| MALDEN       |
+| MANSFIELD    |
+| MARX         |
+| MCCONAUGHEY  |
+| MCDORMAND    |
+| MCKELLEN     |
+| MCQUEEN      |
+| MIRANDA      |
+| MONROE       |
+| MOSTEL       |
+| NEESON       |
+| NICHOLSON    |
+| NOLTE        |
+| OLIVIER      |
+| PALTROW      |
+| PECK         |
+| PENN         |
+| PESCI        |
+| PFEIFFER     |
+| PHOENIX      |
+| PINKETT      |
+| PITT         |
+| POSEY        |
+| PRESLEY      |
+| REYNOLDS     |
+| RYDER        |
+| SILVERSTONE  |
+| SINATRA      |
+| SOBIESKI     |
+| STALLONE     |
+| STREEP       |
+| SUVARI       |
+| SWANK        |
+| TANDY        |
+| TAUTOU       |
+| TEMPLE       |
+| TOMEI        |
+| TORN         |
+| TRACY        |
+| VOIGHT       |
+| WAHLBERG     |
+| WALKEN       |
+| WAYNE        |
+| WEST         |
+| WILLIAMS     |
+| WILLIS       |
+| WILSON       |
+| WINSLET      |
+| WITHERSPOON  |
+| WOOD         |
+| WRAY         |
+| ZELLWEGER    |
++--------------+
+121 rows in set (0.0134 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select distinct(last_name) from actor
+                                       -> union
+                                       -> select distinct(last_name) from actor
+                                       -> ;
++--------------+
+| last_name    |
++--------------+
+| AKROYD       |
+| ALLEN        |
+| ASTAIRE      |
+| BACALL       |
+| BAILEY       |
+| BALE         |
+| BALL         |
+| BARRYMORE    |
+| BASINGER     |
+| BENING       |
+| BERGEN       |
+| BERGMAN      |
+| BERRY        |
+| BIRCH        |
+| BLOOM        |
+| BOLGER       |
+| BRIDGES      |
+| BRODY        |
+| BULLOCK      |
+| CAGE         |
+| CARREY       |
+| CHAPLIN      |
+| CHASE        |
+| CLOSE        |
+| COSTNER      |
+| CRAWFORD     |
+| CRONYN       |
+| CROWE        |
+| CRUISE       |
+| CRUZ         |
+| DAMON        |
+| DAVIS        |
+| DAY-LEWIS    |
+| DEAN         |
+| DEE          |
+| DEGENERES    |
+| DENCH        |
+| DEPP         |
+| DERN         |
+| DREYFUSS     |
+| DUKAKIS      |
+| DUNST        |
+| FAWCETT      |
+| GABLE        |
+| GARLAND      |
+| GIBSON       |
+| GOLDBERG     |
+| GOODING      |
+| GRANT        |
+| GUINESS      |
+| HACKMAN      |
+| HARRIS       |
+| HAWKE        |
+| HESTON       |
+| HOFFMAN      |
+| HOPE         |
+| HOPKINS      |
+| HOPPER       |
+| HUDSON       |
+| HUNT         |
+| HURT         |
+| JACKMAN      |
+| JOHANSSON    |
+| JOLIE        |
+| JOVOVICH     |
+| KEITEL       |
+| KILMER       |
+| LEIGH        |
+| LOLLOBRIGIDA |
+| MALDEN       |
+| MANSFIELD    |
+| MARX         |
+| MCCONAUGHEY  |
+| MCDORMAND    |
+| MCKELLEN     |
+| MCQUEEN      |
+| MIRANDA      |
+| MONROE       |
+| MOSTEL       |
+| NEESON       |
+| NICHOLSON    |
+| NOLTE        |
+| OLIVIER      |
+| PALTROW      |
+| PECK         |
+| PENN         |
+| PESCI        |
+| PFEIFFER     |
+| PHOENIX      |
+| PINKETT      |
+| PITT         |
+| POSEY        |
+| PRESLEY      |
+| REYNOLDS     |
+| RYDER        |
+| SILVERSTONE  |
+| SINATRA      |
+| SOBIESKI     |
+| STALLONE     |
+| STREEP       |
+| SUVARI       |
+| SWANK        |
+| TANDY        |
+| TAUTOU       |
+| TEMPLE       |
+| TOMEI        |
+| TORN         |
+| TRACY        |
+| VOIGHT       |
+| WAHLBERG     |
+| WALKEN       |
+| WAYNE        |
+| WEST         |
+| WILLIAMS     |
+| WILLIS       |
+| WILSON       |
+| WINSLET      |
+| WITHERSPOON  |
+| WOOD         |
+| WRAY         |
+| ZELLWEGER    |
++--------------+
+121 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select distinct(last_name) from customer
+                                       -> union
+                                       -> select distinct(last_name) from actor;
++--------------+
+| last_name    |
++--------------+
+| ABNEY        |
+| ADAM         |
+| ADAMS        |
+| ALEXANDER    |
+| ALLARD       |
+| ALLEN        |
+| ALVAREZ      |
+| ANDERSON     |
+| ANDREW       |
+| ANDREWS      |
+| AQUINO       |
+| ARCE         |
+| ARCHULETA    |
+| ARMSTRONG    |
+| ARNOLD       |
+| ARSENAULT    |
+| ARTIS        |
+| ASHCRAFT     |
+| ASHER        |
+| AUSTIN       |
+| BAILEY       |
+| BAKER        |
+| BALES        |
+| BANDA        |
+| BANKS        |
+| BARBEE       |
+| BARCLAY      |
+| BARFIELD     |
+| BARKLEY      |
+| BARNES       |
+| BARNETT      |
+| BARRETT      |
+| BATES        |
+| BAUGH        |
+| BAUGHMAN     |
+| BELL         |
+| BENNER       |
+| BENNETT      |
+| BERRY        |
+| BESS         |
+| BETANCOURT   |
+| BILLINGSLEY  |
+| BISHOP       |
+| BLACK        |
+| BLAKELY      |
+| BOLIN        |
+| BONE         |
+| BOSTIC       |
+| BOUDREAU     |
+| BOURQUE      |
+| BOWENS       |
+| BOWMAN       |
+| BOX          |
+| BOYD         |
+| BRADLEY      |
+| BREAUX       |
+| BREWER       |
+| BRINSON      |
+| BROOKS       |
+| BROTHERS     |
+| BROWN        |
+| BROWNLEE     |
+| BRYANT       |
+| BUFORD       |
+| BULL         |
+| BUNN         |
+| BURK         |
+| BURKE        |
+| BURLESON     |
+| BURNS        |
+| BURTON       |
+| BUSTAMANTE   |
+| BUTLER       |
+| BUTTERFIELD  |
+| BYRD         |
+| CABRAL       |
+| CALDWELL     |
+| CAMPBELL     |
+| CARBONE      |
+| CARLSON      |
+| CARPENTER    |
+| CARR         |
+| CARRANZA     |
+| CARROLL      |
+| CARTER       |
+| CARY         |
+| CASILLAS     |
+| CASTILLO     |
+| CASTRO       |
+| CAUSEY       |
+| CHAMBERS     |
+| CHAPA        |
+| CHAPMAN      |
+| CHAVEZ       |
+| CHEATHAM     |
+| CHESTNUT     |
+| CHISHOLM     |
+| CHOATE       |
+| CHRISTENSON  |
+| CHURCHILL    |
+| CINTRON      |
+| CLARK        |
+| CLARY        |
+| COLBY        |
+| COLE         |
+| COLEMAN      |
+| COLLAZO      |
+| COLLINS      |
+| COOK         |
+| COOPER       |
+| CORNISH      |
+| CORNWELL     |
+| COUGHLIN     |
+| COX          |
+| COY          |
+| CRAIG        |
+| CRAWFORD     |
+| CRAWLEY      |
+| CROMWELL     |
+| CROUSE       |
+| CRUZ         |
+| CULP         |
+| CULPEPPER    |
+| CUNNINGHAM   |
+| CURLEY       |
+| CURRIER      |
+| CURTIS       |
+| DANIELS      |
+| DAVIDSON     |
+| DAVIS        |
+| DAY          |
+| DEAN         |
+| DELOACH      |
+| DELUCA       |
+| DELVALLE     |
+| DEVORE       |
+| DIAZ         |
+| DIXON        |
+| DOUGLAS      |
+| DOUGLASS     |
+| DOWD         |
+| DUGGAN       |
+| DUNCAN       |
+| DUNN         |
+| EAST         |
+| EASTER       |
+| EBERT        |
+| EDWARDS      |
+| EGGLESTON    |
+| ELLINGTON    |
+| ELLIOTT      |
+| ELLIS        |
+| ELROD        |
+| ELY          |
+| EMMONS       |
+| ESTEP        |
+| EVANS        |
+| FARNSWORTH   |
+| FENNELL      |
+| FERGUSON     |
+| FERNANDEZ    |
+| FIELDS       |
+| FISHER       |
+| FLEMING      |
+| FLETCHER     |
+| FLORES       |
+| FORD         |
+| FORMAN       |
+| FORSYTHE     |
+| FORTIER      |
+| FORTNER      |
+| FOSTER       |
+| FOUST        |
+| FOWLER       |
+| FOX          |
+| FRALEY       |
+| FRANCISCO    |
+| FRANKLIN     |
+| FRAZIER      |
+| FREEMAN      |
+| FULLER       |
+| FULTZ        |
+| GAFFNEY      |
+| GAITHER      |
+| GAMEZ        |
+| GANDY        |
+| GANNON       |
+| GARCIA       |
+| GARDINER     |
+| GARDNER      |
+| GARRETT      |
+| GARZA        |
+| GAVIN        |
+| GEARY        |
+| GEORGE       |
+| GIBSON       |
+| GILBERT      |
+| GILLETTE     |
+| GILLILAND    |
+| GILMAN       |
+| GOMEZ        |
+| GONZALES     |
+| GONZALEZ     |
+| GOOCH        |
+| GOODEN       |
+| GORDON       |
+| GRAF         |
+| GRAHAM       |
+| GRANT        |
+| GRAVES       |
+| GRAY         |
+| GRECO        |
+| GREEN        |
+| GREENE       |
+| GREGORY      |
+| GRESHAM      |
+| GREY         |
+| GRIFFIN      |
+| GRIGSBY      |
+| GRISSOM      |
+| GRUBER       |
+| GUAJARDO     |
+| GUILLEN      |
+| GUNDERSON    |
+| GUTIERREZ    |
+| HALE         |
+| HALL         |
+| HAMILTON     |
+| HANNON       |
+| HANSEN       |
+| HANSON       |
+| HARDER       |
+| HARDISON     |
+| HARKINS      |
+| HARPER       |
+| HARRIS       |
+| HARRISON     |
+| HART         |
+| HARVEY       |
+| HAUSER       |
+| HAVENS       |
+| HAWKINS      |
+| HAWKS        |
+| HAYES        |
+| HEATON       |
+| HENDERSON    |
+| HENNING      |
+| HENRY        |
+| HERNANDEZ    |
+| HERRERA      |
+| HERRMANN     |
+| HERZOG       |
+| HIATT        |
+| HICKS        |
+| HIDALGO      |
+| HILL         |
+| HITE         |
+| HOFFMAN      |
+| HOLLAND      |
+| HOLM         |
+| HOLMES       |
+| HOLT         |
+| HOPKINS      |
+| HORTON       |
+| HOULE        |
+| HOWARD       |
+| HOWELL       |
+| HOWLAND      |
+| HUDSON       |
+| HUEY         |
+| HUGHES       |
+| HUNT         |
+| HUNTER       |
+| HURTADO      |
+| IRBY         |
+| ISBELL       |
+| ISOM         |
+| JACKSON      |
+| JACOBS       |
+| JAMES        |
+| JENKINS      |
+| JENNINGS     |
+| JENSEN       |
+| JIMENEZ      |
+| JOHNSON      |
+| JOHNSTON     |
+| JONES        |
+| JORDAN       |
+| JORDON       |
+| JOY          |
+| JUNG         |
+| KAHN         |
+| KELLEY       |
+| KELLY        |
+| KENNEDY      |
+| KENYON       |
+| KIM          |
+| KINDER       |
+| KING         |
+| KNIGHT       |
+| KNOTT        |
+| KOWALSKI     |
+| KRAUS        |
+| KRUGER       |
+| LAMBERT      |
+| LANCE        |
+| LANE         |
+| LARSON       |
+| LARUE        |
+| LAWRENCE     |
+| LAWSON       |
+| LAWTON       |
+| LEE          |
+| LEONE        |
+| LEWIS        |
+| LINTON       |
+| LITTLE       |
+| LOMBARDI     |
+| LONG         |
+| LOPEZ        |
+| LOVELACE     |
+| LOWE         |
+| LUCAS        |
+| LUMPKIN      |
+| LYMAN        |
+| LYNCH        |
+| MACKENZIE    |
+| MADRIGAL     |
+| MAHAN        |
+| MAHON        |
+| MALCOLM      |
+| MARK         |
+| MARKHAM      |
+| MARLOW       |
+| MARSHALL     |
+| MARTEL       |
+| MARTIN       |
+| MARTINEZ     |
+| MARTINO      |
+| MASON        |
+| MATTHEWS     |
+| MATTOX       |
+| MAULDIN      |
+| MAY          |
+| MCADAMS      |
+| MCALISTER    |
+| MCCARTER     |
+| MCCARTNEY    |
+| MCCOY        |
+| MCCRARY      |
+| MCCURDY      |
+| MCDONALD     |
+| MCDUFFIE     |
+| MCKINNEY     |
+| MCWHORTER    |
+| MEADOR       |
+| MEDINA       |
+| MEEHAN       |
+| MEEK         |
+| MENA         |
+| MENARD       |
+| MENDOZA      |
+| MEYER        |
+| MILAM        |
+| MILES        |
+| MILLARD      |
+| MILLER       |
+| MILLS        |
+| MILNER       |
+| MITCHELL     |
+| MOELLER      |
+| MONTGOMERY   |
+| MOORE        |
+| MORALES      |
+| MORENO       |
+| MORGAN       |
+| MORRELL      |
+| MORRIS       |
+| MORRISON     |
+| MORRISSEY    |
+| MOTLEY       |
+| MURPHY       |
+| MURRAY       |
+| MURRELL      |
+| MYERS        |
+| NEAL         |
+| NELSON       |
+| NETTLES      |
+| NEUMANN      |
+| NEWSOM       |
+| NGO          |
+| NGUYEN       |
+| NICHOLS      |
+| NOE          |
+| NOLAND       |
+| NOLEN        |
+| OBRIEN       |
+| OCAMPO       |
+| OGLESBY      |
+| OLIVARES     |
+| OLIVER       |
+| OLSON        |
+| OLVERA       |
+| ORTIZ        |
+| OUTLAW       |
+| OWENS        |
+| PAINE        |
+| PALMER       |
+| PARKER       |
+| PATTERSON    |
+| PAYNE        |
+| PEARSON      |
+| PEMBERTON    |
+| PENA         |
+| PEREZ        |
+| PERKINS      |
+| PERRY        |
+| PERRYMAN     |
+| PETERS       |
+| PETERSON     |
+| PFEIFFER     |
+| PHILLIPS     |
+| PIERCE       |
+| PINSON       |
+| PITT         |
+| POINDEXTER   |
+| PORTER       |
+| POULIN       |
+| POWELL       |
+| POWER        |
+| PREWITT      |
+| PRICE        |
+| PULLEN       |
+| PURDY        |
+| QUALLS       |
+| QUIGLEY      |
+| QUINTANILLA  |
+| RALSTON      |
+| RAMIREZ      |
+| RAMOS        |
+| RAPP         |
+| RATCLIFF     |
+| RAY          |
+| REA          |
+| REED         |
+| REID         |
+| RENNER       |
+| REYES        |
+| REYNOLDS     |
+| RHOADS       |
+| RHODES       |
+| RICE         |
+| RICHARDS     |
+| RICHARDSON   |
+| RICKETTS     |
+| RICO         |
+| RILEY        |
+| RINEHART     |
+| RIVERA       |
+| ROBB         |
+| ROBERT       |
+| ROBERTS      |
+| ROBERTSON    |
+| ROBINS       |
+| ROBINSON     |
+| RODRIGUEZ    |
+| RODRIQUEZ    |
+| ROGERS       |
+| ROMERO       |
+| ROSE         |
+| ROSS         |
+| ROUSH        |
+| ROYAL        |
+| RUIZ         |
+| RUNYON       |
+| RUSSELL      |
+| RYAN         |
+| SALISBURY    |
+| SANBORN      |
+| SANCHEZ      |
+| SANDERS      |
+| SATTERFIELD  |
+| SAUER        |
+| SCARBOROUGH  |
+| SCHILLING    |
+| SCHMIDT      |
+| SCHOFIELD    |
+| SCHRADER     |
+| SCHULER      |
+| SCHWAB       |
+| SCHWARZ      |
+| SCOTT        |
+| SCROGGINS    |
+| SEAL         |
+| SELBY        |
+| SEWARD       |
+| SHANKS       |
+| SHAW         |
+| SHELBY       |
+| SHELLEY      |
+| SHELTON      |
+| SHERROD      |
+| SIKES        |
+| SILVA        |
+| SILVERMAN    |
+| SIMMONS      |
+| SIMPKINS     |
+| SIMPSON      |
+| SIMS         |
+| SKIDMORE     |
+| SLEDGE       |
+| SLONE        |
+| SMITH        |
+| SNYDER       |
+| SOTO         |
+| SOUTH        |
+| SPEAR        |
+| SPENCER      |
+| SPURLOCK     |
+| STANFIELD    |
+| STANLEY      |
+| STCLAIR      |
+| STEPHENS     |
+| STEPP        |
+| STEVENS      |
+| STEWART      |
+| STILL        |
+| STONE        |
+| SULLIVAN     |
+| SUTTON       |
+| SWAFFORD     |
+| TALBERT      |
+| TAN          |
+| TAYLOR       |
+| TEEL         |
+| TERRY        |
+| THOMAS       |
+| THOMPSON     |
+| THORN        |
+| THRASHER     |
+| TIRADO       |
+| TOBIAS       |
+| TOMLIN       |
+| TORRES       |
+| TROUT        |
+| TROUTMAN     |
+| TRUONG       |
+| TUBBS        |
+| TUCKER       |
+| TURNER       |
+| TURPIN       |
+| VANHORN      |
+| VARGAS       |
+| VARNEY       |
+| VASQUEZ      |
+| VEST         |
+| VINES        |
+| VU           |
+| WADE         |
+| WAGGONER     |
+| WAGNER       |
+| WALDROP      |
+| WALKER       |
+| WALLACE      |
+| WALTERS      |
+| WARD         |
+| WARREN       |
+| WASHINGTON   |
+| WATKINS      |
+| WATSON       |
+| WATTS        |
+| WAUGH        |
+| WAY          |
+| WEAVER       |
+| WEBB         |
+| WEINER       |
+| WELCH        |
+| WELLS        |
+| WEST         |
+| WESTMORELAND |
+| WHEAT        |
+| WHEELER      |
+| WHITE        |
+| WHITING      |
+| WILES        |
+| WILLIAMS     |
+| WILLIAMSON   |
+| WILLIS       |
+| WILSON       |
+| WINDHAM      |
+| WOFFORD      |
+| WOOD         |
+| WOODS        |
+| WREN         |
+| WRIGHT       |
+| WYMAN        |
+| YANEZ        |
+| YEE          |
+| YOUNG        |
+| AKROYD       |
+| ASTAIRE      |
+| BACALL       |
+| BALE         |
+| BALL         |
+| BARRYMORE    |
+| BASINGER     |
+| BENING       |
+| BERGEN       |
+| BERGMAN      |
+| BIRCH        |
+| BLOOM        |
+| BOLGER       |
+| BRIDGES      |
+| BRODY        |
+| BULLOCK      |
+| CAGE         |
+| CARREY       |
+| CHAPLIN      |
+| CHASE        |
+| CLOSE        |
+| COSTNER      |
+| CRONYN       |
+| CROWE        |
+| CRUISE       |
+| DAMON        |
+| DAY-LEWIS    |
+| DEE          |
+| DEGENERES    |
+| DENCH        |
+| DEPP         |
+| DERN         |
+| DREYFUSS     |
+| DUKAKIS      |
+| DUNST        |
+| FAWCETT      |
+| GABLE        |
+| GARLAND      |
+| GOLDBERG     |
+| GOODING      |
+| GUINESS      |
+| HACKMAN      |
+| HAWKE        |
+| HESTON       |
+| HOPE         |
+| HOPPER       |
+| HURT         |
+| JACKMAN      |
+| JOHANSSON    |
+| JOLIE        |
+| JOVOVICH     |
+| KEITEL       |
+| KILMER       |
+| LEIGH        |
+| LOLLOBRIGIDA |
+| MALDEN       |
+| MANSFIELD    |
+| MARX         |
+| MCCONAUGHEY  |
+| MCDORMAND    |
+| MCKELLEN     |
+| MCQUEEN      |
+| MIRANDA      |
+| MONROE       |
+| MOSTEL       |
+| NEESON       |
+| NICHOLSON    |
+| NOLTE        |
+| OLIVIER      |
+| PALTROW      |
+| PECK         |
+| PENN         |
+| PESCI        |
+| PHOENIX      |
+| PINKETT      |
+| POSEY        |
+| PRESLEY      |
+| RYDER        |
+| SILVERSTONE  |
+| SINATRA      |
+| SOBIESKI     |
+| STALLONE     |
+| STREEP       |
+| SUVARI       |
+| SWANK        |
+| TANDY        |
+| TAUTOU       |
+| TEMPLE       |
+| TOMEI        |
+| TORN         |
+| TRACY        |
+| VOIGHT       |
+| WAHLBERG     |
+| WALKEN       |
+| WAYNE        |
+| WINSLET      |
+| WITHERSPOON  |
+| WRAY         |
+| ZELLWEGER    |
++--------------+
+698 rows in set (0.0016 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > show tables;
++----------------------------+
+| Tables_in_sakila           |
++----------------------------+
+| actor                      |
+| actor_info                 |
+| address                    |
+| category                   |
+| city                       |
+| country                    |
+| customer                   |
+| customer_list              |
+| film                       |
+| film_actor                 |
+| film_category              |
+| film_list                  |
+| film_text                  |
+| inventory                  |
+| language                   |
+| nicer_but_slower_film_list |
+| payment                    |
+| rental                     |
+| sales_by_film_category     |
+| sales_by_store             |
+| staff                      |
+| staff_list                 |
+| store                      |
++----------------------------+
+23 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > \use eva_2
+Default schema set to `eva_2`.
+Fetching global names, object names from `eva_2` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  eva_2  SQL > selec * from tablab;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec * from tablab' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablab;
++----+--------+
+| id | nombre |
++----+--------+
+|  1 | X      |
+|  2 | Y      |
+|  3 | Z      |
+|  4 | A      |
+|  5 | B      |
++----+--------+
+5 rows in set (0.0006 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa
+                                      -> union
+                                      -> select * from tablab;
++----+--------+
+| id | nombre |
++----+--------+
+|  1 | A      |
+|  2 | B      |
+|  3 | C      |
+|  4 | D      |
+|  1 | X      |
+|  2 | Y      |
+|  3 | Z      |
+|  4 | A      |
+|  5 | B      |
++----+--------+
+9 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa
+                                      -> intersect
+                                      -> select * from tablab;
+Empty set (0.0010 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select nombre from tablaa
+                                      -> intersect
+                                      -> select nombre from tablab;
++--------+
+| nombre |
++--------+
+| A      |
+| B      |
++--------+
+2 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa
+                                      -> where nombre in (
+                                      -> select nombre from tablab);
++----+--------+
+| id | nombre |
++----+--------+
+|  1 | A      |
+|  2 | B      |
++----+--------+
+2 rows in set (0.0012 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa
+                                      -> where nombre in )
+                                      -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa
+                                      -> where nombre in (
+                                      -> select distinct(nombre) from (tablab);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa where nombre in (select distinct(nombre) from (tablab);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa
+                                      -> where nombre in(
+                                      -> select distinct(nombre) from tablab);
++----+--------+
+| id | nombre |
++----+--------+
+|  1 | A      |
+|  2 | B      |
++----+--------+
+2 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL > select * from tablaa where nombre not in( select distinct(nombre) from tablab);
+
++----+--------+
+| id | nombre |
++----+--------+
+|  3 | C      |
+|  4 | D      |
++----+--------+
+2 rows in set (0.0031 sec)
+ MySQL  localhost:3306 ssl  eva_2  SQL >
