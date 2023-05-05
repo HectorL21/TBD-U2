@@ -1,0 +1,157 @@
+MySQL Shell 8.0.31
+
+Copyright (c) 2016, 2022, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 9
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > create user 'prueba'@"localhost' identified by
+                               ">
+                               ">
+                               "> '12345';
+                               ">
+                               "> ;
+                               "> ^C
+ MySQL  localhost:3306 ssl  SQL > create user 'prueba'@'localhost' identified by '12345';
+Query OK, 0 rows affected (0.0315 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba@localhost 12345
+\connect [--mx|--mysqlx|--mc|--mysql] [--ssh <sshuri>] <URI>
+ MySQL  localhost:3306 ssl  SQL > drop user 'prueba@localhost';
+ERROR: 1396 (HY000): Operation DROP USER failed for 'prueba@localhost'@'%'
+ MySQL  localhost:3306 ssl  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 10
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba@localhost
+Creating a Classic session to 'prueba@localhost'
+Please provide the password for 'prueba@localhost': *****
+Save password for 'prueba@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 11
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba@localhost
+Creating a Classic session to 'prueba@localhost'
+Please provide the password for 'prueba@localhost': *****
+Save password for 'prueba@localhost'? [Y]es/[N]o/Ne[v]er (default No):
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 12
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > select host, user from mysql.user;
+ERROR: 1142 (42000): SELECT command denied to user 'prueba'@'localhost' for table 'user'
+ MySQL  localhost:3306 ssl  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 13
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > select host, user from mysql.user;
++-----------+------------------+
+| host      | user             |
++-----------+------------------+
+| localhost | mysql.infoschema |
+| localhost | mysql.session    |
+| localhost | mysql.sys        |
+| localhost | prueba           |
+| localhost | root             |
++-----------+------------------+
+5 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  SQL > create user 'prueba2'@'localhost' identified by '12345';
+Query OK, 0 rows affected (0.0578 sec)
+ MySQL  localhost:3306 ssl  SQL > select host, user from mysql.user;
++-----------+------------------+
+| host      | user             |
++-----------+------------------+
+| localhost | mysql.infoschema |
+| localhost | mysql.session    |
+| localhost | mysql.sys        |
+| localhost | prueba           |
+| localhost | prueba2          |
+| localhost | root             |
++-----------+------------------+
+6 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  SQL > grant all on eva_2.* to 'prueba2'@'localhost';
+Query OK, 0 rows affected (0.0041 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba2@localhost;
+Creating a Classic session to 'prueba2@localhost;'
+Please provide the password for 'prueba2@localhost;': *****
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba2@localhost;
+Creating a Classic session to 'prueba2@localhost;'
+Please provide the password for 'prueba2@localhost;': *****
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| agencia            |
+| bdpendientes       |
+| comp2              |
+| company            |
+| eva_2              |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| ordenes            |
+| peliculas          |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+14 rows in set (0.0039 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba2@localhost;
+Creating a Classic session to 'prueba2@localhost;'
+Please provide the password for 'prueba2@localhost;': *****
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  localhost:3306 ssl  SQL > \connect prueba2@localhost;
+Creating a session to 'prueba2@localhost;'
+Please provide the password for 'prueba2@localhost;': *****
+MySQL Error 2005: No such host is known 'localhost;'
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba@localhost;
+Creating a Classic session to 'prueba@localhost;'
+Please provide the password for 'prueba@localhost;': *****
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  localhost:3306 ssl  SQL > \connect  prueba@localhost;
+Creating a session to 'prueba@localhost;'
+Please provide the password for 'prueba@localhost;': *****
+MySQL Error 2005: No such host is known 'localhost;'
+ MySQL  localhost:3306 ssl  SQL > \connect  prueba@localhost;
+Creating a session to 'prueba@localhost;'
+Please provide the password for 'prueba@localhost;': *****
+MySQL Error 2005: No such host is known 'localhost;'
+ MySQL  localhost:3306 ssl  SQL > create user 'prueba3'@'localhost' by '12345';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by '12345'' at line 1
+ MySQL  localhost:3306 ssl  SQL > create user 'prueba3'@'localhost' identified by '12345';
+Query OK, 0 rows affected (0.0421 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect prueba3@localhost
+Creating a session to 'prueba3@localhost'
+Please provide the password for 'prueba3@localhost': *****
+Save password for 'prueba3@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 14 (X protocol)
+Server version: 8.0.31 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:33060+ ssl  SQL > grant all on eva_2.* to 'prueba3'@'localhost';
+ERROR: 1044: Access denied for user 'prueba3'@'localhost' to database 'eva_2'
+ MySQL  localhost:33060+ ssl  SQL > \disconnect
+ MySQL  SQL >
